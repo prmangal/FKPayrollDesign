@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 public class Add_Employee{
 	public static void add_employee(){
 
-		System.out.println("Please provide Employee_name, is_hourly, salary , method_of_payment separated by spaces");
+		System.out.println("Please provide Employee_name, is_hourly, salary ,comission rate, method_of_payment separated by spaces");
 		Scanner scan = new Scanner(System.in);
 		String [] input = scan.nextLine().split(" ");
 		

@@ -10,6 +10,7 @@ public class Payroll{
 		System.out.println("Please choose one of the following options :");
 		System.out.println("Adding a new employee : press 1 and hit enter");
 		System.out.println("Firing an employee : press 2 and hit enter");
+		System.out.println("Changing data of an employee : press 3 and hit enter");
 
 		Scanner scan = new Scanner(System.in);
 		int n = scan.nextInt();
@@ -18,6 +19,9 @@ public class Payroll{
 		}
 		if(n==2){
 			Fire_Employee.fire_employee();
+		}
+		if(n==3){
+			Change_Details.change_details();
 		}
 
 

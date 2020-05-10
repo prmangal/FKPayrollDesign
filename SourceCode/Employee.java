@@ -1,3 +1,12 @@
+import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import org.json.simple.JSONObject; 
+import org.json.simple.JSONArray; 
+import org.json.simple.parser.JSONParser; 
+import org.json.simple.parser.ParseException;
 interface Emp{
 	int get_employee_id();
 	void set_employee_id(int i);
@@ -7,6 +16,8 @@ interface Emp{
 	void set_hour_rate(int rate);
 	double get_com_rate();
 	void set_com_rate(double rate);
+	int get_dues();
+	void set_dues(int dues);
 	int get_monthly_salary();
 	void set_monthly_salary(int salary);
 	double get_total_salary();
@@ -22,7 +33,8 @@ public class Employee implements Emp{
 	private int monthly_salary;
 	private double total_salary;
 	public String method_of_payment;
-	
+	private int dues;
+
 
 
 	//constructor
@@ -41,6 +53,31 @@ public class Employee implements Emp{
 		this.com_rate=com_rate;
 		this.total_salary = 0;
 		this.method_of_payment = method_of_payment;
+		this.dues = 0;
+
+	}
+	public Employee(int id){
+		try{ 
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(new FileReader("employees.json"));
+			JSONObject a = (JSONObject)obj;
+
+			JSONObject emp = (JSONObject)a.get(String.valueOf(id));
+			this.name = emp.get("name").toString();
+			this.employee_id = id;
+			this.is_hourly = Boolean.parseBoolean(emp.get("is_hourly").toString());
+			this.hour_rate = Integer.parseInt(emp.get("hour_rate").toString());
+			this.com_rate = Integer.parseInt(emp.get("com_rate").toString());
+			this.monthly_salary = Integer.parseInt(emp.get("monthly_salary").toString());
+			this.total_salary = Double.parseDouble(emp.get("total_salary").toString());
+			this.method_of_payment = emp.get("method_of_payment").toString();
+			this.dues = Integer.parseInt(emp.get("dues").toString());
+            FileWriter fileWriter = new FileWriter("employees.json");         // writing back to the file
+            fileWriter.write(a.toJSONString());
+            fileWriter.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 	}
 	public int get_employee_id(){
@@ -76,22 +113,28 @@ public class Employee implements Emp{
 	public double get_total_salary(){
 		return total_salary;
 	}
+	public int get_dues(){
+		return dues;
+	}
+	public void set_dues(int dues){
+		this.dues = dues;
+	}
 	public void calculate_salary(int overtime, int sales){
 		if(is_hourly){
 			if(overtime>=0){
-				total_salary += overtime*1.5*hour_rate + 8*hour_rate + sales*com_rate/100;
+				total_salary += overtime*1.5*hour_rate + 8*hour_rate + sales*com_rate/100-dues;
  			}
  			else{
- 				total_salary += (8+overtime)*hour_rate + sales*com_rate/100;
+ 				total_salary += (8+overtime)*hour_rate + sales*com_rate/100-dues;
  			}
 		}
 		else{
 			double h_rate = monthly_salary/(30*8);
 			if(overtime>=0){
-				total_salary += overtime*1.5*h_rate + 8*h_rate + sales*com_rate/100;
+				total_salary += overtime*1.5*h_rate + 8*h_rate + sales*com_rate/100-dues;
  			}
  			else{
- 				total_salary += (8+overtime)*h_rate + sales*com_rate/100;
+ 				total_salary += (8+overtime)*h_rate + sales*com_rate/100-dues;
  			}
 		}
 

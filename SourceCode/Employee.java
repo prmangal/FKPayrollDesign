@@ -72,9 +72,6 @@ public class Employee implements Emp{
 			this.total_salary = Double.parseDouble(emp.get("total_salary").toString());
 			this.method_of_payment = emp.get("method_of_payment").toString();
 			this.dues = Integer.parseInt(emp.get("dues").toString());
-            FileWriter fileWriter = new FileWriter("employees.json");         // writing back to the file
-            fileWriter.write(a.toJSONString());
-            fileWriter.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }

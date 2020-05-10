@@ -25,6 +25,7 @@ public class Add_Employee{
 		details.put("monthly_salary",emp.get_monthly_salary());
 		details.put("total_salary",emp.get_total_salary());
 		details.put("method_of_payment",emp.method_of_payment);
+		details.put("dues",emp.get_dues());
 		try{ 
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(new FileReader("employees.json"));
@@ -41,10 +42,6 @@ public class Add_Employee{
 			else
 				return;
 			
-
-
-			// writing the JSONObject into a file(info.json)
-        
             FileWriter fileWriter = new FileWriter("employees.json");         // writing back to the file
             fileWriter.write(a.toJSONString());
             fileWriter.flush();

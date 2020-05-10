@@ -1,0 +1,1 @@
+{"1":{"monthly_salary":0,"is_hourly":true,"com_rate":10.0,"total_salary":0.0,"employee_id":1,"name":"Virat","hour_rate":500,"method_of_payment":"Cheque"},"total":2,"2":{"monthly_salary":300000,"is_hourly":false,"com_rate":20.0,"total_salary":0.0,"employee_id":2,"name":"Pranav","hour_rate":0,"method_of_payment":"Bank_Transfer"}}

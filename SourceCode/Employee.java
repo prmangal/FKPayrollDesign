@@ -21,6 +21,9 @@ interface Emp{
 	int get_monthly_salary();
 	void set_monthly_salary(int salary);
 	double get_total_salary();
+	void set_total_salary(double salary);
+	double get_com_salary();
+	void set_com_salary(double salary);
 	void calculate_salary(int overtime, int sales);
 }
 public class Employee implements Emp{
@@ -32,6 +35,7 @@ public class Employee implements Emp{
 	private double com_rate;
 	private int monthly_salary;
 	private double total_salary;
+	private double com_salary;
 	public String method_of_payment;
 	private int dues;
 
@@ -51,7 +55,8 @@ public class Employee implements Emp{
 			this.hour_rate = 0;
 		}
 		this.com_rate=com_rate;
-		this.total_salary = 0;
+		this.com_salary = 0.0;
+		this.total_salary = 0.0;
 		this.method_of_payment = method_of_payment;
 		this.dues = 0;
 
@@ -67,9 +72,10 @@ public class Employee implements Emp{
 			this.employee_id = id;
 			this.is_hourly = Boolean.parseBoolean(emp.get("is_hourly").toString());
 			this.hour_rate = Integer.parseInt(emp.get("hour_rate").toString());
-			this.com_rate = Integer.parseInt(emp.get("com_rate").toString());
+			this.com_rate = Double.parseDouble(emp.get("com_rate").toString());
 			this.monthly_salary = Integer.parseInt(emp.get("monthly_salary").toString());
 			this.total_salary = Double.parseDouble(emp.get("total_salary").toString());
+			this.com_salary = Double.parseDouble(emp.get("com_salary").toString());
 			this.method_of_payment = emp.get("method_of_payment").toString();
 			this.dues = Integer.parseInt(emp.get("dues").toString());
         } catch (Exception e) {
@@ -116,22 +122,35 @@ public class Employee implements Emp{
 	public void set_dues(int dues){
 		this.dues = dues;
 	}
+	public void set_total_salary(double salary){
+		total_salary = salary;
+	}
+	public double get_com_salary(){
+		return com_salary;
+	}
+	public void set_com_salary(double salary){
+		com_salary = salary;
+	}
 	public void calculate_salary(int overtime, int sales){
 		if(is_hourly){
 			if(overtime>=0){
-				total_salary += overtime*1.5*hour_rate + 8*hour_rate + sales*com_rate/100-dues;
+				total_salary += overtime*1.5*hour_rate + 8*hour_rate - dues;
+				com_salary += sales*com_rate/100;
  			}
  			else{
- 				total_salary += (8+overtime)*hour_rate + sales*com_rate/100-dues;
+ 				total_salary += (8+overtime)*hour_rate - dues;
+				com_salary += sales*com_rate/100;
  			}
 		}
 		else{
-			double h_rate = monthly_salary/(30*8);
+			double h_rate = monthly_salary/(30*8.0);
 			if(overtime>=0){
-				total_salary += overtime*1.5*h_rate + 8*h_rate + sales*com_rate/100-dues;
+				total_salary += overtime*1.5*h_rate + 8*h_rate - dues;
+				com_salary += sales*com_rate/100;
  			}
  			else{
- 				total_salary += (8+overtime)*h_rate + sales*com_rate/100-dues;
+ 				total_salary += (8+overtime)*h_rate - dues;
+				com_salary += sales*com_rate/100;
  			}
 		}
 

@@ -23,6 +23,7 @@ public class Add_Employee{
 		details.put("hour_rate",emp.get_hour_rate());
 		details.put("com_rate",emp.get_com_rate());
 		details.put("monthly_salary",emp.get_monthly_salary());
+		details.put("com_salary",emp.get_total_salary());
 		details.put("total_salary",emp.get_total_salary());
 		details.put("method_of_payment",emp.method_of_payment);
 		details.put("dues",emp.get_dues());
@@ -41,7 +42,7 @@ public class Add_Employee{
 			}
 			else
 				return;
-			
+
             FileWriter fileWriter = new FileWriter("employees.json");         // writing back to the file
             fileWriter.write(a.toJSONString());
             fileWriter.flush();

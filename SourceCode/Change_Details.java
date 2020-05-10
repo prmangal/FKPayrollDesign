@@ -16,7 +16,7 @@ public class Change_Details{
 			if(field.equals("method_of_payment")){
 				method = value;
 			}
-			else if(field.equals("com_rate"))
+			else if(field.equals("com_rate") || field.equals("total_salary")||field.equals("com_salary"))
 				com = Double.parseDouble(value);
 			else
 				val = Integer.parseInt(value);
@@ -26,7 +26,7 @@ public class Change_Details{
 			JSONObject emp = (JSONObject)a.get(String.valueOf(id));
 			if(field.equals("method_of_payment"))
 				emp.put(field,method);
-			else if(field.equals("com_rate"))
+			else if(field.equals("com_rate")||field.equals("total_salary")||field.equals("com_salary"))
 				emp.put(field,com);
 			else
 				emp.put(field,val);

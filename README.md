@@ -19,4 +19,5 @@ After execution it will ask for following options:\
       6. Post union dues of an employee : press 6 and hit enter\
       7. Run payroll : press 7 and hit enter\
 Choose the desired option and follow the instructions shown in terminal \
-For more details read Documentation.
+For more details read Documentation. \
+Note. Database(employees.json) is already provided with 4 employee data. If you want a fresh start you must overwrite employees.json with "{"total":0}" (without inverted commas).

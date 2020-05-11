@@ -61,7 +61,7 @@ public class Payroll{
 			    emp.calculate_salary(overtime,sales);
 
 			    Change_Details.change(id,"total_salary", String.valueOf(emp.get_total_salary()));
-			    Change_Details.change(id,"dues", "0");
+			    if(emp.get_dues()>0)Change_Details.change(id,"dues", "0");
 			    Change_Details.change(id,"com_salary", String.valueOf(emp.get_com_salary()));
 			    //System.out.println(emp.get_total_salary()+ " "+ emp.get_com_salary());
 
